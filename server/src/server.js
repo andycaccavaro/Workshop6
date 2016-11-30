@@ -1,5 +1,11 @@
 
 
+var express = require('express'); // Creates an Express server.
+var app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.text());
+// Support receiving JSON in HTTP request bodies
+app.use(bodyParser.json());
 
 var StatusUpdateSchema = require('./schemas/statusupdate.json');
 var validate = require('express-jsonschema').validate;
@@ -7,14 +13,10 @@ var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
 var database = require('./database');
 var readDocument = database.readDocument;
-var express = require('express'); // Creates an Express server.
-var app = express();
+
 // Defines what happens when it receives the `GET /` request
 // Starts the server on port 3000!
 // Support receiving text in HTTP request bodies
-app.use(bodyParser.text());
-// Support receiving JSON in HTTP request bodies
-app.use(bodyParser.json());
 
 
 //app.use(bodyParser.text());
@@ -81,7 +83,8 @@ function postStatusUpdate(user, location, contents) {
 // If we were implementing this for real on an actual server, we would check // that the user ID is correct & matches the authenticated user. But since // we're mocking it, we can be less strict.
   // Get the current UNIX time.
 var time = new Date().getTime();
-// The new status update. The database will assign the ID for us. var newStatusUpdate = {
+// The new status update. The database will assign the ID for us.
+var newStatusUpdate = {
     "likeCounter": [],
     "type": "statusUpdate",
     "contents": {
