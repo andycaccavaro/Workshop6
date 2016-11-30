@@ -84,7 +84,8 @@ throw new Error('Unknown body type: ' + typeof(body));
 } }
 
 export function getFeedData(user, cb) {
-// We don't need to send a body, so pass in 'undefined' for the body. sendXHR('GET', '/user/4/feed', undefined, (xhr) => {
+// We don't need to send a body, so pass in 'undefined' for the body.
+sendXHR('GET', '/user/4/feed', undefined, (xhr) => {
     // Call the callback with the data.
     cb(JSON.parse(xhr.responseText));
   });
