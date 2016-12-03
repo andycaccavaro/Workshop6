@@ -110,16 +110,9 @@ cb(JSON.parse(xhr.responseText));
  * Adds a new comment to the database on the given feed item.
  */
 export function postComment(feedItemId, author, contents, cb) {
-  var feedItem = readDocument('feedItems', feedItemId);
-  feedItem.comments.push({
-    "author": author,
-    "contents": contents,
-    "postDate": new Date().getTime(),
-    "likeCounter": []
-  });
-  writeDocument('feedItems', feedItem);
-  // Return a resolved version of the feed item.
-  emulateServerReturn(getFeedItemSync(feedItemId), cb);
+  sendXHR('POST', '/feeditem/' + feedItemId + '/comment',{"author": author, "contents": contents, "likeCounter": []},(xhr) => {
+      cb(JSON.parse(xhr.responseText));
+    });
 }
 
 /**
@@ -151,3 +144,15 @@ sendXHR('POST', '/search', queryText, (xhr) => {
     cb(JSON.parse(xhr.responseText));
   });
 }
+
+export function likeComment(feedItemId, commentIdx, userId, cb)
+{
+  sendXHR('PUT', '/feedItem/' + feedItemId + '/commentID/' + commentIdx
+           + '/likelist/' + userId, undefined, (xhr) => { cb(JSON.parse(xhr.responseText));
+}); }
+
+export function unlikeComment(feedItemId, commentIdx, userId, cb)
+{
+  sendXHR('DELETE', '/feedItem/' + feedItemId + '/commentID/' + commentIdx
+           + '/likelist/' + userId, undefined, (xhr) => { cb(JSON.parse(xhr.responseText));
+}); }

@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 
 var StatusUpdateSchema = require('./schemas/statusupdate.json');
 var validate = require('express-jsonschema').validate;
+var CommentSchema = require('./schemas/comment.json');
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
 var database = require('./database');

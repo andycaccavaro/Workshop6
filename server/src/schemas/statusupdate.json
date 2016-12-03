@@ -6,7 +6,6 @@
 "userId": {
   "id": "userId",
   "type": "integer"
-41
 },
     "location": {
       "id": "location",
