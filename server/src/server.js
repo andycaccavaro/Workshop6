@@ -139,10 +139,6 @@ res.status(400).end(); } else {
 next(err); }
 });
 
-app.listen(3000, function () {
-console.log('Example app listening on port 3000!');
-});
-
 
 // Reset database.
 app.post('/resetdb', function(req, res) { console.log("Resetting database...");
@@ -257,3 +253,8 @@ var feedItem = readDocument('feedItems', feedItemID); return feedItem.contents.c
 // 400: Bad Request.
 res.status(400).end();
 } });
+
+
+app.listen(3000, function () {
+console.log('Example app listening on port 3000!');
+});

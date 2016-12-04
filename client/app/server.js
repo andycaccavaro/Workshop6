@@ -110,7 +110,7 @@ cb(JSON.parse(xhr.responseText));
  * Adds a new comment to the database on the given feed item.
  */
 export function postComment(feedItemId, author, contents, cb) {
-  sendXHR('POST', '/feeditem/' + feedItemId + '/comment',{"author": author, "contents": contents, "likeCounter": []},(xhr) => {
+  sendXHR('POST', '/feeditem/' + feedItemId + '/comment',{"author": author, "contents": contents, "likeCounter": [], "postDate": new Date().getTime()},(xhr) => {
       cb(JSON.parse(xhr.responseText));
     });
 }
